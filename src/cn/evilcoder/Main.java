@@ -10,5 +10,4 @@ public class Main {
       System.out.println(BigDecimalUtil.add(0.2,0.005));
     }
 
-
 }
