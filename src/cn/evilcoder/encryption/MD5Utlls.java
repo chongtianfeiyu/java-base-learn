@@ -7,22 +7,22 @@ import java.security.MessageDigest;
  * Date: 2016/6/11
  * Time: 17:56
  */
-public class MD5 {
+public class MD5Utlls {
   private final static String[] digits = {"0", "1", "2", "3", "4",
       "5", "6", "7", "8", "9",
       "a", "b", "c", "d", "e", "f"};
 
-  public static String byte2HexString(byte b) {
+  private static String byte2HexString(byte b) {
     int n = b;
     if (n < 0) {
       n = 256 + n;
     }
-    int d1 = n / 16;
-    int d2 = n % 16;
+    int d1 = (n >>> 4) & 0xf;
+    int d2 = n & 0xf;
     return digits[d1] + digits[d2];
   }
 
-  public static String byteArrayToHexString(byte[] bytes) {
+  private static String byteArrayToHexString(byte[] bytes) {
     StringBuffer sb = new StringBuffer();
     for (byte b : bytes) {
       sb.append(byte2HexString(b));
