@@ -1,5 +1,7 @@
 package cn.evilcoder;
 
+import cn.evilcoder.encryption.AES128Impl;
+import cn.evilcoder.encryption.AESExceptions;
 import cn.evilcoder.encryption.MessageDigestAlgorithm;
 import cn.evilcoder.encryption.MessageDigestUtlls;
 import cn.evilcoder.json.JsonUtils;
@@ -17,9 +19,22 @@ public class Main {
         String md52 = MessageDigestUtlls.getMessageDigestString(str2, MessageDigestAlgorithm.SHA256);
         System.out.println("md51=" + md51);
         System.out.println("md52=" + md52);
-        for (int i = 0; i < 255 ;i++) {
-            System.out.println(String.format("%%%02X", i));
+
+        String content = "evilcoder";
+        String sk = "123456789123456789";
+        try {
+            String encryptContent = AES128Impl.encrypt(content, sk);
+            String decryptContent = AES128Impl.decrypt(encryptContent, sk);
+            System.out.println("original-content = " + content);
+
+            System.out.println("encrypt-content = " + encryptContent);
+            System.out.println("decrypt-content = " + decryptContent);
+        } catch (AESExceptions.EncryptServiceException e) {
+            e.printStackTrace();
+        } catch (AESExceptions.DecryptServiceException e) {
+            e.printStackTrace();
         }
+
 
         Person person = new Person();
         person.setAge(20);
