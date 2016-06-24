@@ -1,6 +1,6 @@
 package cn.evilcoder.encryption;
 
-import cn.evilcoder.Utils.HexStringUtils;
+import cn.evilcoder.utils.HexStringUtils;
 
 import java.security.MessageDigest;
 

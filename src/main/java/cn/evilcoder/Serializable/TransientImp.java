@@ -1,4 +1,4 @@
-package cn.evilcoder.Serializable;
+package cn.evilcoder.serializable;
 
 import java.io.*;
 

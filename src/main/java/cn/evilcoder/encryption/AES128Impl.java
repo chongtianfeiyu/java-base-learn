@@ -7,8 +7,8 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.GeneralSecurityException;
 
-import static cn.evilcoder.Utils.HexStringUtils.bytesToHexString;
-import static cn.evilcoder.Utils.HexStringUtils.hexStringToBytes;
+import static cn.evilcoder.utils.HexStringUtils.bytesToHexString;
+import static cn.evilcoder.utils.HexStringUtils.hexStringToBytes;
 
 /**
  * 用AES 128位加密算法进行加密，用SK的前16位作为密钥,

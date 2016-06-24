@@ -1,4 +1,4 @@
-package cn.evilcoder.Utils;
+package cn.evilcoder.utils;
 
 /**
  * 二进制字节流与十六进制转换(大写字母)
