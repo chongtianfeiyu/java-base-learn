@@ -4,6 +4,8 @@ import cn.evilcoder.encryption.AES128Impl;
 import cn.evilcoder.encryption.AESExceptions;
 import cn.evilcoder.encryption.MessageDigestAlgorithm;
 import cn.evilcoder.encryption.MessageDigestUtlls;
+import cn.evilcoder.init.NonStaticBlock;
+import cn.evilcoder.init.StaticBlock;
 import cn.evilcoder.json.JsonUtils;
 import cn.evilcoder.model.Person;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -49,6 +51,11 @@ public class Main {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+
+       new NonStaticBlock();
+       new NonStaticBlock();
     }
+
+
 
 }
