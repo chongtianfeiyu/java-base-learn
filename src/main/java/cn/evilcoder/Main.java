@@ -35,6 +35,9 @@ public class Main {
             e.printStackTrace();
         }
 
+        for (int i = 0; i <= 17; i++) {
+            System.out.println(i + "=" + Integer.toHexString(i));
+        }
 
         Person person = new Person();
         person.setAge(20);
