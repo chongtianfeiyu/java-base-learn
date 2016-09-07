@@ -4,12 +4,16 @@ import cn.evilcoder.encryption.AES128Impl;
 import cn.evilcoder.encryption.AESExceptions;
 import cn.evilcoder.encryption.MessageDigestAlgorithm;
 import cn.evilcoder.encryption.MessageDigestUtlls;
-import cn.evilcoder.init.NonStaticBlock;
-import cn.evilcoder.init.StaticBlock;
 import cn.evilcoder.json.JsonUtils;
 import cn.evilcoder.model.Person;
+import cn.evilcoder.temp.HypervisorDiskConfig;
+import cn.evilcoder.temp.HypervisorExtraModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.sun.script.javascript.JSAdapter;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
 
@@ -52,10 +56,36 @@ public class Main {
             e.printStackTrace();
         }
 
-       new NonStaticBlock();
-       new NonStaticBlock();
+
+        String hy = "{\"diskDetail\":[{\"type\":\"sata\",\"sizePerDiskInGb\":200,\"diskLeft\":15,\"diskTotal\":4}]}";
+        String server = "{\"diskDetail\":[{\"type\":\"sata\",\"sizePerDiskInGb\":6144,\"diskLeft\":0,\"diskTotal\":2}]}";
+
+        HypervisorExtraModel hypervisorExtraModel = JsonUtils.fromJsonString(hy, HypervisorExtraModel.class);
+        HypervisorExtraModel serverExtraModel = JsonUtils.fromJsonString(server, HypervisorExtraModel.class);
+
+        hypervisorExtraModel.setDiskDetail(mergeHypervisorDiskConfigMap(hypervisorExtraModel,
+                serverExtraModel));
+        System.out.println(hypervisorExtraModel.getDiskLeftCountByType(null));
+        System.out.println(JsonUtils.toJsonString(hypervisorExtraModel));
+
     }
 
+
+    public static List<HypervisorDiskConfig> mergeHypervisorDiskConfigMap(HypervisorExtraModel hypervisorExtraModel,
+                                                                    HypervisorExtraModel serverExtraModel) {
+        Map<String, HypervisorDiskConfig> hypervisor = new HashMap<String, HypervisorDiskConfig>();
+        for (HypervisorDiskConfig diskConfig : hypervisorExtraModel.getDiskDetail()) {
+            hypervisor.put(diskConfig.getType(), diskConfig);
+        }
+        for (HypervisorDiskConfig diskConfig : serverExtraModel.getDiskDetail()) {
+            if (hypervisor.containsKey(diskConfig.getType())) {
+                HypervisorDiskConfig hypervisorDiskConfig = hypervisor.get(diskConfig.getType());
+                hypervisorDiskConfig.setDiskLeft(hypervisorDiskConfig.getDiskLeft() + diskConfig.getDiskTotal());
+                hypervisor.put(diskConfig.getType(), hypervisorDiskConfig);
+            }
+        }
+        return new ArrayList<HypervisorDiskConfig>(hypervisor.values());
+    }
 
 
 }
