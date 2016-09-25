@@ -17,8 +17,8 @@ import java.util.Map;
 
 public class Main {
 
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
         String str1 = "abc";
         String str2 = "abd";
         String md51 = MessageDigestUtlls.getMessageDigestString(str1, MessageDigestAlgorithm.SHA256);
