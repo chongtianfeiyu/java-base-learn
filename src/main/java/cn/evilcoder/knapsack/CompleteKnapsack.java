@@ -1,7 +1,7 @@
 package cn.evilcoder.knapsack;
 
 /**
- * Created by huangshanqi on 2016/10/16.
+ * Created by http://www.evilcoder.cn/ on 2016/10/16.
  */
 public class CompleteKnapsack {
     /**
